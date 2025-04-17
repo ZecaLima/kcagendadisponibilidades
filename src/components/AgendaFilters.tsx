@@ -124,21 +124,21 @@ export default function AgendaFilters({
                         </Listbox.Button>
 
                         <Transition show={open} as={Fragment}>
-                            <Listbox.Options className="absolute w-auto h-[60vh] overflow-y-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Listbox.Options className="absolute w-auto max-h-[60vh] overflow-y-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 {Especialidades?.map((especialidade) => (
-                                <Listbox.Option
-                                    key={especialidade.id}
-                                    value={especialidade}
-                                    className={({ selected }) =>
-                                    `relative cursor-default select-none py-2 px-4 ${
-                                        selected
-                                        ? 'bg-lime-500 text-white hover:bg-lime-600'
-                                        : 'text-gray-900 hover:bg-gray-200'
-                                    }`
-                                    }
-                                >
-                                    {especialidade.title}
-                                </Listbox.Option>
+                                    <Listbox.Option
+                                        key={especialidade.id}
+                                        value={especialidade}
+                                        className={({ selected }) =>
+                                        `relative cursor-default select-none py-2 px-4 ${
+                                            selected
+                                            ? 'bg-lime-500 text-white hover:bg-lime-600'
+                                            : 'text-gray-900 hover:bg-gray-200'
+                                        }`
+                                        }
+                                    >
+                                        {especialidade.title}
+                                    </Listbox.Option>
                                 ))}
                             </Listbox.Options>
                         </Transition>
@@ -171,21 +171,21 @@ export default function AgendaFilters({
                         </Listbox.Button>
 
                         <Transition show={open} as={Fragment}>
-                            <Listbox.Options className="absolute w-auto h-[60vh] overflow-y-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Listbox.Options className="absolute w-auto max-h-[60vh] overflow-y-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 {Unidades.map((unidade) => (
-                                <Listbox.Option
-                                    key={unidade.name}
-                                    value={unidade}
-                                    className={({ selected }) =>
-                                    `relative cursor-default select-none py-2 px-4 ${
-                                        selected
-                                        ? 'bg-lime-500 text-white hover:bg-lime-600'
-                                        : 'text-gray-900 bg-gray-200'
-                                    }`
-                                    }
-                                >
-                                    {unidade.name}
-                                </Listbox.Option>
+                                    <Listbox.Option
+                                        key={unidade.name}
+                                        value={unidade}
+                                        className={({ selected }) =>
+                                        `relative cursor-default select-none py-2 px-4 ${
+                                            selected
+                                            ? 'bg-lime-500 text-white hover:bg-lime-600'
+                                            : 'text-gray-900 hover:bg-gray-200'
+                                        }`
+                                        }
+                                    >
+                                        {unidade.name}
+                                    </Listbox.Option>
                                 ))}
                             </Listbox.Options>
                         </Transition>
