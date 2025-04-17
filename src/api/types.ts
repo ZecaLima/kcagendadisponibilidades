@@ -139,3 +139,15 @@ export interface IMarcacao {
   permiteEditar: boolean;
   permiteRemover: boolean;
 }
+
+
+export interface IEspecialidade{
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  allowAppointement: string;
+  appointementText: string;
+  specialityTypeCode: string;
+  specialityTypeDescription: string;
+}

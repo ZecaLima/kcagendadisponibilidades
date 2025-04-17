@@ -1,3 +1,5 @@
+import AgendaFilters from '@/components/AgendaFilters';
+import AgendaMatriz from '@/components/AgendaMatriz';
 import React, { Fragment, useState } from 'react';
 
 interface AgendaPageProps {
@@ -8,8 +10,9 @@ export default function AgendaPage({
 }: AgendaPageProps) {
 
   return (
-    <h1>
-        Agenda
-    </h1>
+    <div className='flex flex-col w-full h-full'>
+      <AgendaFilters/>
+      <AgendaMatriz/>
+    </div>
   );
 }
