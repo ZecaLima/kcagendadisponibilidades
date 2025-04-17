@@ -140,7 +140,6 @@ export interface IMarcacao {
   permiteRemover: boolean;
 }
 
-
 export interface IEspecialidade{
   id: string;
   title: string;
@@ -150,4 +149,10 @@ export interface IEspecialidade{
   appointementText: string;
   specialityTypeCode: string;
   specialityTypeDescription: string;
+}
+
+export interface IFilial{
+  codigo: string;
+  descricao: string;
+  abreviatura: string;
 }

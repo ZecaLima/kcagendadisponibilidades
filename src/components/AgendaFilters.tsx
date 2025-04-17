@@ -3,7 +3,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { IEspecialidade } from '@/api/types';
+import { IEspecialidade, IFilial } from '@/api/types';
 
 interface AgendaFiltersProps {
     dataInicial: Date | null;
@@ -12,8 +12,8 @@ interface AgendaFiltersProps {
     setDataFinal: (date: Date | null) => void;
     selectedEspecialidade: IEspecialidade | null;
     setSelectedEspecialidade: (especialidade: IEspecialidade) => void;
-    selectedUnidade: { id: number, name: string, unavailable: boolean } | null;
-    setSelectedUnidade: (unidade: { id: number; name: string; unavailable: boolean }) => void;
+    selectedFilial: IFilial | null;
+    setSelectedFilial: ( filial : IFilial) => void;
 }
 
 export default function AgendaFilters({
@@ -23,21 +23,21 @@ export default function AgendaFilters({
     setDataFinal,
     selectedEspecialidade,
     setSelectedEspecialidade,
-    selectedUnidade,
-    setSelectedUnidade,
+    selectedFilial,
+    setSelectedFilial,
 }: AgendaFiltersProps) {
 
-    const Unidades = [
-        { id: 1, name: 'Unidade1', unavailable: false },
-        { id: 2, name: 'Unidade2', unavailable: false },
-        { id: 3, name: 'Unidade3' , unavailable: false },
-        { id: 4, name: 'Unidade4', unavailable: true },
-        { id: 5, name: 'Unidade5', unavailable: false },
+    const Filiais = [
+        { codigo: "SEDE", descricao: 'Sede', abreviatura: "SD" },
+        { codigo: "FL1", descricao: 'Filial 1', abreviatura: "Filial 1" },
+        { codigo: "FL2", descricao: 'Filial 2 - PartilhaResultados', abreviatura: "Filial 2 -PartRes" },
+        { codigo: "FL3", descricao: 'Presc MCDT', abreviatura: "Presc MCDT" },
+        { codigo: "FL4", descricao: 'Presc PEM', abreviatura: "Presc PEM" },
     ]
 
     useEffect(() => {
-        if (!selectedUnidade) {
-            setSelectedUnidade(Unidades[0]);
+        if (!selectedFilial) {
+            setSelectedFilial(Filiais[0]);
         }
     }, []);
 
@@ -166,8 +166,8 @@ export default function AgendaFilters({
             <div className='flex flex-row space-x-4 items-center'>
                 <p>Unidade: </p>
                 <Listbox
-                value={selectedUnidade}
-                onChange={setSelectedUnidade}
+                value={selectedFilial}
+                onChange={setSelectedFilial}
                 >
                 {({ open }) => (
                     <>
@@ -175,7 +175,7 @@ export default function AgendaFilters({
                         <Listbox.Button className="bg-white w-36 cursor-default rounded-md py-1.5 px-2 text-gray-800 ring-1 ring-inset ring-white focus:outline-none focus:ring-2 focus:ring-lime-500 border border-gray-300 shadow-sm">
                         <span className="flex items-center justify-between">
                             <span className="block truncate">
-                                {selectedUnidade?.name ?? 'A Carregar...'}
+                                {selectedFilial?.descricao ?? 'A Carregar...'}
                             </span>
                             <ChevronDownIcon
                                 className="h-5 w-5 text-gray-800"
@@ -187,10 +187,10 @@ export default function AgendaFilters({
 
                         <Transition show={open} as={Fragment}>
                             <Listbox.Options className="absolute w-auto max-h-[60vh] overflow-y-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                {Unidades.map((unidade) => (
+                                {Filiais.map((filial) => (
                                     <Listbox.Option
-                                        key={unidade.name}
-                                        value={unidade}
+                                        key={filial.descricao}
+                                        value={filial}
                                         className={({ selected }) =>
                                         `relative cursor-default select-none py-2 px-4 ${
                                             selected
@@ -199,7 +199,7 @@ export default function AgendaFilters({
                                         }`
                                         }
                                     >
-                                        {unidade.name}
+                                        {filial.descricao}
                                     </Listbox.Option>
                                 ))}
                             </Listbox.Options>

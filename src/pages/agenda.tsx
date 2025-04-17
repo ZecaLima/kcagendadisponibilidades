@@ -1,7 +1,7 @@
 import AgendaFilters from '@/components/AgendaFilters';
 import AgendaMatriz from '@/components/AgendaMatriz';
 import React, { useState } from 'react';
-import { IEspecialidade } from '@/api/types';
+import { IEspecialidade, IFilial } from '@/api/types';
 
 interface AgendaPageProps {
 }
@@ -12,9 +12,9 @@ export default function AgendaPage({
   const [dataInicial, setDataInicial] = useState<Date | null>(new Date());
   const [dataFinal, setDataFinal] = useState<Date | null>(new Date(new Date().setDate(new Date().getDate() + 7)));
 
-  const [selectedUnidade, setSelectedUnidade] = useState<{ id: number, name: string, unavailable: boolean } | null>(null);
-
   const [selectedEspecialidade, setSelectedEspecialidade] = useState<IEspecialidade | null>(null);
+
+  const [selectedFilial, setSelectedFilial] = useState<IFilial | null>(null);
 
   return (
     <div className='flex flex-col w-full h-full'>
@@ -25,14 +25,14 @@ export default function AgendaPage({
       setDataFinal={setDataFinal}
       selectedEspecialidade={selectedEspecialidade}
       setSelectedEspecialidade={setSelectedEspecialidade}
-      selectedUnidade={selectedUnidade}
-      setSelectedUnidade={setSelectedUnidade}
+      selectedFilial={selectedFilial}
+      setSelectedFilial={setSelectedFilial}
       />
       <AgendaMatriz
       dataInicial={dataInicial}
       dataFinal={dataFinal}
       selectedEspecialidade={selectedEspecialidade}
-      selectedUnidade={selectedUnidade}
+      selectedFilial={selectedFilial}
       />
     </div>
   );
