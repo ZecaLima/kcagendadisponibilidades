@@ -6,13 +6,26 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { IEspecialidade } from '@/api/types';
 
 interface AgendaFiltersProps {
+    dataInicial: Date | null;
+    setDataInicial: (date: Date | null) => void;
+    dataFinal: Date | null;
+    setDataFinal: (date: Date | null) => void;
+    selectedEspecialidade: IEspecialidade | null;
+    setSelectedEspecialidade: (especialidade: IEspecialidade) => void;
+    selectedUnidade: { id: number, name: string, unavailable: boolean } | null;
+    setSelectedUnidade: (unidade: { id: number; name: string; unavailable: boolean }) => void;
 }
 
 export default function AgendaFilters({
-
+    dataInicial,
+    setDataInicial,
+    dataFinal,
+    setDataFinal,
+    selectedEspecialidade,
+    setSelectedEspecialidade,
+    selectedUnidade,
+    setSelectedUnidade,
 }: AgendaFiltersProps) {
-    const [dataInicial, setDataInicial] = useState<Date | null>(new Date());
-    const [dataFinal, setDataFinal] = useState<Date | null>(new Date(new Date().setDate(new Date().getDate() + 7)));
 
     const Unidades = [
         { id: 1, name: 'Unidade1', unavailable: false },
@@ -21,10 +34,14 @@ export default function AgendaFilters({
         { id: 4, name: 'Unidade4', unavailable: true },
         { id: 5, name: 'Unidade5', unavailable: false },
     ]
-    const [selectedUnidade, setSelectedUnidade] = useState(Unidades[0]);
+
+    useEffect(() => {
+        if (!selectedUnidade) {
+            setSelectedUnidade(Unidades[0]);
+        }
+    }, []);
 
     const [Especialidades, setEspecialidades] = useState<IEspecialidade[] | null>(null);
-    const [selectedEspecialidade, setSelectedEspecialidade] = useState<IEspecialidade | null>(null);
 
     async function fetchSpecialities(){
         try{
@@ -43,8 +60,6 @@ export default function AgendaFilters({
 
             const data = await response.json();
             setEspecialidades(data.data);
-            console.log('data: ', data);
-            console.log('Especialidades: ', Especialidades);
         } catch (error){
             console.error('Error fetching data: ', error);
         }
@@ -160,7 +175,7 @@ export default function AgendaFilters({
                         <Listbox.Button className="bg-white w-36 cursor-default rounded-md py-1.5 px-2 text-gray-800 ring-1 ring-inset ring-white focus:outline-none focus:ring-2 focus:ring-lime-500 border border-gray-300 shadow-sm">
                         <span className="flex items-center justify-between">
                             <span className="block truncate">
-                                {selectedUnidade.name}
+                                {selectedUnidade?.name ?? 'A Carregar...'}
                             </span>
                             <ChevronDownIcon
                                 className="h-5 w-5 text-gray-800"
